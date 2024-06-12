@@ -14,9 +14,11 @@ export const addProduct = async (req, res) => {
         const index = req.session.cart.findIndex(item => item.id === product.id);
         if (index !== -1) {
             req.session.cart[index].quantity++;
+            req.session.cart[index].price = req.session.cart[index].quantity * req.session.cart[index].price; 
         } else {
             req.session.cart.push({
                 id: product.id,
+                img:product.img,
                 name: product.name,
                 price: product.price,
                 quantity: 1

@@ -8,7 +8,7 @@ import path from 'path';
 const app = express()
 const PORT = 8000
 app.use(express.json());
-connect('mongodb://localhost:27017/Data');
+connect('mongodb://localhost:27017/shopgame');
 const __dirname = path.resolve();
 app.use(cors()); // chan cors khoi loi
 app.use(cookieParser()); // tao cookie va gan cookie

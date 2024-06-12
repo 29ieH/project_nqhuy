@@ -20,7 +20,7 @@
                     %>
                     <div class="col">
                         <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
+                            <img src="<%=product.img%>" class="card-img-top" alt="...">
                             <div class="card-body" style="text-align: left;">
                               <h5 class="card-title">Name: <%=product.name%></h5>
                               <p class="card-text">Developer: <%=product.developer%></p>
@@ -47,6 +47,8 @@
         }
         fetch("/cart/addproduct",options).catch(err => {
             console.log(err)
+        }).then(() => {
+            alert("Add product successfully !")
         })
     }
     </script>

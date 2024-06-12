@@ -1,35 +1,55 @@
 import Invoice from "../models/invoice.model.js";
-export const AddInvoice =  async (req,res) => {
+
+export const AddInvoice = async (req) => {
     try {
-        const produtInCard = req.session.cart;
-        if(!produtInCard) return res.status(404).json({message:"Product in cart is not available"})
-            let totalPrice = 0;
-            produtInCard.forEach(pr => totalPrice += pr)
-            const invoice = new Invoice({
-                products:produtInCard,
-                totalPrice:totalPrice
-            });
-            const newInvoice =  await invoice.save();
-            req.session.cart = null;
-            req.session.idInvoice = newInvoice._id;
-            return res.status(200).json({message:"Invoice created successfully"})
+        console.log("Add invoice");
+
+        // Lấy sản phẩm từ session
+        const productInCard = req.session.cart ? [...req.session.cart] : [];
+        // Kiểm tra xem sản phẩm có tồn tại không
+        if (!productInCard) throw new Error("Product in cart is not available");
+        console.log("Product In card: "+productInCard)
+        let totalPrice = 0;
+        productInCard.forEach(pr => {
+            totalPrice += pr.price * pr.quantity;
+        });
+        let products = [];
+        productInCard.forEach(pr => {
+          products.push({
+            idProduct:pr.id,
+            quantity:pr.quantity,
+            price:pr.price
+          })
+        })
+        // Tạo mới hoá đơn
+        const invoice = new Invoice({
+            products: products,
+            totalPrice: totalPrice
+        });
+
+        // Lưu hoá đơn vào database
+        const newInvoice = await invoice.save();
+
+        // Xóa sản phẩm khỏi session cart
+        req.session.cart = null;
+
+        // Lưu ID của hoá đơn vào session
+        req.session.idInvoice = newInvoice._id;
     } catch (error) {
-        return res.status(500).json({message:error.message});
+        console.log("Error adding invoice:", error.message);
+        throw error;
     }
-}
-export const getInvoice = async (req,res) => {
+};
+
+export const getInvoice = async (req) => {
     try {
-        if(req.session.idInvoice){
-            id = req.session.idInvoice;
-            const invoices = await Invoice.findById(id);
-            if(!invoices) return res.render('noitems',{
-                messsage:   'Invoice not found'
-            })
-            return res.render('invoices',{
-                data:invoices
-            })
-        }
+        // Lấy ID hoá đơn từ session
+        const id = req.session.idInvoice;
+        // Tìm hoá đơn trong database dựa trên ID
+        const invoice = await Invoice.findById(id);
+        return invoice; // Trả về hoá đơn
     } catch (error) {
-        return res.status(500).json({message:error.message});
+        console.log("Error getting invoice:", error.message);
+        throw error;
     }
-}
+};

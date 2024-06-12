@@ -10,59 +10,13 @@
     <div style="display: flex;justify-content: center;">
     <div style="width: 1080px;">
             <%- include('part/header.ejs') %>
-            <div style="margin-top: 60px;">
-                <div class="container text-center">
-                    <div class="row">
-                    <%
-                        var data = data ? data : [];
-                        data.forEach(product => {
-                    %>
-                    <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body" style="text-align: left;">
-                              <h5 class="card-title">Name: <%=product.name%></h5>
-                              <p class="card-text">Developer: <%=product.developer%></p>
-                              <p class="card-text">Price: <%=product.price%></p>
-                              <a href="#" class="btn btn-primary">Add Cart</a>
-                            </div>
-                          </div>
-                      </div>
-                    <% }) %>
-                      <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body" style="text-align: left;">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body" style="text-align: left;">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                          </div>
-                      </div>
-                      <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="..." class="card-img-top" alt="...">
-                            <div class="card-body" style="text-align: left;">
-                              <h5 class="card-title">Card title</h5>
-                              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                              <a href="#" class="btn btn-primary">Go somewhere</a>
-                            </div>
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-            </div>
-        </div>
+            <div style="position: relative;">
+              <img style="width: 100%;" src="https://images.fpt.shop/unsafe/filters:quality(90)/fptshop.com.vn/uploads/images/tin-tuc/146257/Originals/lol-la-gi-1.jpg" alt="">
+              <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; text-align: center;">
+                <h2>SHOP GAME by NQHUY.</h2>
+              </div>  
+          </div>
+    </div>
     </div>
 </body>
 </html>
