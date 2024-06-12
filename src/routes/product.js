@@ -1,0 +1,12 @@
+import express from 'express';
+import { Create, Remove, Update, callback, getAll, getDetail, order_status, payment } from '../controller/product.js';
+const productRouter = express.Router();
+productRouter.get('/', getAll);
+productRouter.get('/:id', getDetail);
+productRouter.post('/', Create);
+productRouter.put('/:id', Update);
+productRouter.delete('/:id', Remove);
+productRouter.post('/payment', payment);
+productRouter.post('/callback', callback);
+productRouter.post('/order-status/:app_trans_id', order_status);
+export default productRouter;
